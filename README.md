@@ -1,12 +1,14 @@
 # 🚀 REST Assured API Automation Framework
 
-A scalable and enterprise-grade REST API Automation Framework built using **Java, REST Assured, TestNG, and Maven**. The framework follows industry best practices including Builder Pattern, POJO Serialization & Deserialization, JSON Schema Validation, Data-Driven Testing, API Chaining, reusable utilities, reporting, logging, and modular architecture to support maintainable and scalable API automation.
+A scalable, enterprise-grade REST API Automation Framework built using **Java, REST Assured, TestNG, and Maven**. The framework demonstrates modern API automation best practices including layered architecture, Builder Pattern, POJO Serialization & Deserialization, JSON Schema Validation, Data-Driven Testing, API Chaining, reusable utilities, centralized validations, reporting, and logging to deliver a maintainable, scalable, and production-ready automation solution.
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
 ![REST Assured](https://img.shields.io/badge/REST--Assured-Latest-green)
 ![TestNG](https://img.shields.io/badge/TestNG-7.x-red)
 ![Maven](https://img.shields.io/badge/Maven-Build-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+![GitHub last commit](https://img.shields.io/github/last-commit/Dishi-Gogia/rest-assured-api-framework)
+![GitHub Repo stars](https://img.shields.io/github/stars/Dishi-Gogia/rest-assured-api-framework?style=social)
 
 ---
 
@@ -14,11 +16,14 @@ A scalable and enterprise-grade REST API Automation Framework built using **Java
 
 - 📌 Key Highlights
 - 🏗️ Tech Stack
+- 🏛️ Framework Architecture
 - 🎯 Framework Objectives
 - 🌐 Application Under Test
 - 📂 Project Structure
 - ⚙️ Features
-- 🔄 API Automation Coverage
+- 🧩 Design Patterns Used
+- ⭐ Enterprise Features
+- 🔄 API Test Coverage
 - ✅ Prerequisites
 - ▶️ How to Run the Framework
 - 📊 Framework Flow
@@ -35,15 +40,19 @@ A scalable and enterprise-grade REST API Automation Framework built using **Java
 
 ✔️ Enterprise Layered Framework Architecture
 
+✔️ REST Assured API Layer
+
 ✔️ Builder Pattern Implementation
 
-✔️ REST Assured Request Specification
+✔️ Request Specification Factory
 
 ✔️ POJO Serialization
 
 ✔️ POJO Deserialization
 
 ✔️ Dynamic PATCH Request using Map
+
+✔️ Authentication Layer
 
 ✔️ JSON Schema Validation
 
@@ -59,7 +68,7 @@ A scalable and enterprise-grade REST API Automation Framework built using **Java
 
 ✔️ Configurable Environment
 
-✔️ Modular & Reusable Utilities
+✔️ Modular & Reusable Utility Classes
 
 ✔️ Enterprise-ready Folder Structure
 
@@ -85,38 +94,73 @@ A scalable and enterprise-grade REST API Automation Framework built using **Java
 
 ---
 
+# 🏛️ Framework Architecture
+
+```text
+                 TestNG Suite
+                      │
+                      ▼
+                Test Classes
+                      │
+                      ▼
+              BookingAPI Layer
+                      │
+                      ▼
+      RequestSpecificationFactory
+                      │
+                      ▼
+              REST Assured Client
+                      │
+                      ▼
+                 API Response
+                      │
+          ┌───────────┴────────────┐
+          ▼                        ▼
+ Response Validation      Schema Validation
+          │                        │
+          └────────────┬───────────┘
+                       ▼
+       Serialization / Deserialization
+                       │
+                       ▼
+            Extent Reports & Log4j2
+```
+
+---
+
 # 🎯 Framework Objectives
 
 The framework is designed to:
 
-- Deliver scalable API automation.
+- Deliver scalable REST API automation.
 - Promote reusable and maintainable code.
 - Demonstrate enterprise REST Assured framework design.
-- Support contract validation using JSON Schema.
-- Showcase industry best practices for API testing.
-- Provide a portfolio-ready automation framework.
+- Validate API contracts using JSON Schema.
+- Showcase modern API automation best practices.
+- Provide a portfolio-ready enterprise automation framework.
+- Simplify payload creation using Builder Pattern.
+- Improve framework extensibility through modular architecture.
 
 ---
 
 # 🌐 Application Under Test
 
-**Website**
+### Website
 
 https://restful-booker.herokuapp.com
 
-The framework automates complete CRUD operations including:
+The framework automates complete REST API CRUD operations including:
 
 - Authentication
 - Create Booking
 - Get Booking
 - Update Booking
-- Partial Update Booking
+- Partial Update Booking (PATCH)
 - Delete Booking
 - Complete Booking Workflow
-- Schema Validation
+- JSON Schema Validation
 - Response Validation
-
----
+- API Chaining
 
 # 📂 Project Structure
 
@@ -126,26 +170,63 @@ The framework automates complete CRUD operations including:
 │
 ├── test
 │   ├── java
-│   │   ├── api
-│   │   ├── builders
-│   │   ├── dataprovider
-│   │   ├── endpoints
-│   │   ├── listeners
-│   │   ├── models
-│   │   ├── reports
-│   │   ├── specifications
-│   │   ├── tests
-│   │   ├── utilities
-│   │   └── validators
 │   │
-│   └── resources
-│       ├── schema
-│       ├── testdata
-│       ├── config.properties
-│       └── log4j2.xml
+│   │── api
+│   │     └── BookingAPI.java
+│   │
+│   │── builders
+│   │     ├── AuthBuilder.java
+│   │     ├── BookingBuilder.java
+│   │     └── PatchBuilder.java
+│   │
+│   │── dataprovider
+│   │     └── BookingDataProvider.java
+│   │
+│   │── endpoints
+│   │     └── Routes.java
+│   │
+│   │── listeners
+│   │     └── TestListener.java
+│   │
+│   │── models
+│   │     ├── AuthRequest.java
+│   │     ├── Booking.java
+│   │     ├── BookingDates.java
+│   │     └── BookingResponse.java
+│   │
+│   │── reports
+│   │     └── ExtentManager.java
+│   │
+│   │── specifications
+│   │     └── RequestSpecificationFactory.java
+│   │
+│   │── tests
+│   │     ├── CreateBookingTest.java
+│   │     ├── GetBookingTest.java
+│   │     ├── UpdateBookingTest.java
+│   │     ├── PartialUpdateBookingTest.java
+│   │     ├── DeleteBookingTest.java
+│   │     └── BookingWorkflowTest.java
+│   │
+│   │── utilities
+│   │     ├── ConfigReader.java
+│   │     ├── EnvironmentUtils.java
+│   │     ├── ExcelUtils.java
+│   │     ├── ExtentLogger.java
+│   │     ├── JsonUtils.java
+│   │     └── LoggerUtils.java
+│   │
+│   └── validators
+│         └── ResponseValidator.java
 │
-├── pom.xml
+├── src/test/resources
+│     ├── config.properties
+│     ├── log4j2.xml
+│     ├── schema
+│     └── testdata
+│
 ├── testng.xml
+├── pom.xml
 └── README.md
 ```
 
@@ -153,100 +234,176 @@ The framework automates complete CRUD operations including:
 
 # ⚙️ Features
 
-🔥 Layered Framework Design
+🔥 Enterprise Layered Framework Architecture
 
-🔥 Builder Pattern
+🔥 REST Assured API Layer
 
-🔥 Request Specification Factory
+🔥 Builder Pattern Implementation
 
-🔥 POJO Serialization
+🔥 Factory Pattern for Request Specifications
+
+🔥 Authentication Module
+
+🔥 POJO Serialization using Jackson
 
 🔥 POJO Deserialization
 
-🔥 Dynamic PATCH Requests
+🔥 Dynamic PATCH Requests using Map
+
+🔥 Request Specification Factory
 
 🔥 JSON Schema Validation
 
-🔥 Response Validation
-
-🔥 Excel Data-Driven Testing
+🔥 Centralized Response Validation
 
 🔥 API Chaining
 
-🔥 Extent HTML Reports
+🔥 CRUD Workflow Automation
 
-🔥 Log4j2 Logging
+🔥 Excel Data-Driven Testing
 
 🔥 Configurable Environment
+
+🔥 Extent HTML Reporting
+
+🔥 Log4j2 Logging
 
 🔥 Reusable Utility Classes
 
 🔥 Maven Dependency Management
 
-🔥 Enterprise-ready Framework
+🔥 Modular & Maintainable Framework
+
+🔥 GitHub Portfolio Ready
 
 ---
 
-# 🔄 API Automation Coverage
+# 🧩 Design Patterns Used
 
-The framework currently automates:
+The framework follows several industry-standard design patterns to improve scalability, maintainability, and code reusability.
 
-✅ Authentication
+| Design Pattern | Purpose |
+|---------------|---------|
+| Builder Pattern | Reusable request payload creation |
+| Factory Pattern | Centralized Request Specification creation |
+| Singleton Pattern | Extent Report instance management |
+| POJO Pattern | Serialization & Deserialization |
+| Data Provider Pattern | Excel-based Data-Driven Testing |
+| Layered Architecture | Separation of framework responsibilities |
+| Utility Pattern | Reusable helper methods |
 
-✅ Create Booking
+---
 
-✅ Get Booking
+# ⭐ Enterprise Features
 
-✅ Update Booking
+The framework has been designed following enterprise automation standards.
 
-✅ Partial Update Booking
+✔ Layered Framework Architecture
 
-✅ Delete Booking
+✔ Reusable API Layer
 
-✅ CRUD Workflow Testing
+✔ Centralized Request Specifications
 
-✅ Schema Validation
+✔ Centralized Response Validators
 
-✅ Response Validation
+✔ Dynamic Request Payload Creation
+
+✔ Builder-based Payload Design
+
+✔ Authentication Layer
+
+✔ API Chaining
+
+✔ CRUD Workflow Automation
+
+✔ JSON Contract Validation
+
+✔ Schema Validation
+
+✔ Data-Driven Testing
+
+✔ Extent HTML Reporting
+
+✔ Log4j2 Logging
+
+✔ Environment-based Configuration
+
+✔ Modular & Scalable Framework Design
+
+✔ GitHub Portfolio Ready
+
+---
+
+# 🔄 API Test Coverage
+
+The framework currently automates the following REST API scenarios:
+
+| Module | Status |
+|---------|:------:|
+| Authentication | ✅ |
+| Create Booking | ✅ |
+| Get Booking | ✅ |
+| Update Booking | ✅ |
+| Partial Update Booking | ✅ |
+| Delete Booking | ✅ |
+| Complete CRUD Workflow | ✅ |
+| API Chaining | ✅ |
+| JSON Schema Validation | ✅ |
+| Response Validation | ✅ |
+| POJO Serialization | ✅ |
+| POJO Deserialization | ✅ |
+| Data-Driven Testing | ✅ |
+| Dynamic PATCH Request | ✅ |
 
 ---
 
 # ✅ Prerequisites
 
+Before running the framework, ensure the following software is installed:
+
 - Java 17 or above
 - Maven 3.8+
-- Eclipse / IntelliJ IDEA
+- Eclipse IDE / IntelliJ IDEA
 - Git
+- Internet Connection (for Restful Booker API)
 
 ---
 
 # ▶️ How to Run the Framework
 
-## Clone Repository
+## 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/Dishi-Gogia/rest-assured-api-framework.git
 ```
 
-## Navigate to Project
+---
+
+## 2️⃣ Navigate to Project
 
 ```bash
 cd rest-assured-api-framework
 ```
 
-## Install Dependencies
+---
+
+## 3️⃣ Install Dependencies
 
 ```bash
 mvn clean install
 ```
 
-## Execute Tests
+---
+
+## 4️⃣ Execute Complete Test Suite
 
 ```bash
 mvn clean test
 ```
 
-## Execute TestNG Suite
+---
+
+## 5️⃣ Execute TestNG Suite
 
 ```bash
 mvn test -DsuiteXmlFile=testng.xml
@@ -254,82 +411,193 @@ mvn test -DsuiteXmlFile=testng.xml
 
 ---
 
+## 6️⃣ Execute Individual Test Classes
+
+Examples:
+
+```bash
+CreateBookingTest
+
+GetBookingTest
+
+UpdateBookingTest
+
+PartialUpdateBookingTest
+
+DeleteBookingTest
+
+BookingWorkflowTest
+```
+
+---
+
+## 7️⃣ Generated Outputs
+
+After execution, the framework automatically generates:
+
+- 📊 Extent HTML Report
+- 📄 TestNG Reports
+- 📝 Log4j2 Execution Logs
+
+> **Note:** Generated reports and logs are ignored through `.gitignore` and are not committed to the repository.
+
 # 📊 Framework Flow
 
 ```text
-            TestNG Suite
-                 │
-                 ▼
-          Test Execution
-                 │
-                 ▼
-            Builder Pattern
-                 │
-                 ▼
-          Request Specification
-                 │
-                 ▼
-          REST Assured API
-                 │
-                 ▼
-         Response Validation
-                 │
-                 ▼
-        Schema Validation
-                 │
-                 ▼
-      Serialization / Deserialization
-                 │
-                 ▼
-         Extent Report & Logs
+                          TestNG Suite
+                               │
+                               ▼
+                         Test Execution
+                               │
+                               ▼
+                    Data Provider (Excel)
+                               │
+                               ▼
+                    Builder Pattern (Payload)
+                               │
+                               ▼
+                        API Layer (BookingAPI)
+                               │
+                               ▼
+               RequestSpecificationFactory
+                               │
+                               ▼
+                      REST Assured Client
+                               │
+                               ▼
+                          API Execution
+                               │
+                               ▼
+                           API Response
+                               │
+                ┌──────────────┴──────────────┐
+                ▼                             ▼
+       Response Validation          JSON Schema Validation
+                │                             │
+                └──────────────┬──────────────┘
+                               ▼
+                POJO Deserialization / Validation
+                               │
+                               ▼
+                Extent Reports & Log4j2 Logging
 ```
 
 ---
 
 # 🎯 Framework Design Goals
 
-- Scalability
-- Reusability
-- Maintainability
-- Readability
-- Modular Architecture
-- Enterprise-ready API Automation
+The framework has been designed with enterprise automation principles in mind.
+
+✔ Scalable Architecture
+
+✔ Modular Design
+
+✔ Code Reusability
+
+✔ Easy Maintenance
+
+✔ Readable & Clean Code
+
+✔ Separation of Concerns
+
+✔ Centralized Configurations
+
+✔ Reusable API Components
+
+✔ Data-Driven Testing
+
+✔ Enterprise-ready Automation Framework
+
+✔ GitHub Portfolio Ready
 
 ---
 
 # 📸 Execution Reports
 
-The framework automatically generates:
+The framework automatically generates the following execution artifacts:
 
-- Extent HTML Reports
-- TestNG Reports
-- Log4j2 Execution Logs
+- 📊 Extent HTML Report
+- 📄 TestNG Reports
+- 📝 Log4j2 Execution Logs
 
-> **Note:** Generated reports and logs are excluded from Git using `.gitignore`.
+The reports provide:
+
+- Test Execution Summary
+- Pass / Fail Status
+- Request Body
+- Response Body
+- HTTP Method
+- API Endpoint
+- Status Code
+- Response Time
+- Exception Details (if any)
+
+> **Note:** Generated reports and logs are excluded from version control using `.gitignore`.
+
+---
+
+# 🚀 Why This Framework?
+
+This project demonstrates modern enterprise API automation practices rather than simple API test scripts.
+
+Key engineering decisions include:
+
+- Layered framework architecture
+- Builder Pattern for request payload creation
+- POJO Serialization & Deserialization using Jackson
+- Factory Pattern for Request Specifications
+- JSON Schema Validation
+- Dynamic PATCH implementation using `Map<String, Object>`
+- Centralized Response Validation
+- API Chaining
+- Data-Driven Testing using Excel
+- Reusable utility components
+- Extent Reporting
+- Log4j2 Logging
 
 ---
 
 # 🔄 Future Enhancements
 
+The following enhancements are planned for future versions:
+
+- ✅ OAuth 2.0 Authentication Support
 - ✅ Jenkins CI/CD Integration
-- ✅ GitHub Actions
+- ✅ GitHub Actions Pipeline
 - ✅ Docker Support
-- ✅ Parallel Execution
-- ✅ API Mocking
-- ✅ Allure Reporting
+- ✅ Parallel Test Execution
+- ✅ API Mocking (WireMock)
+- ✅ Contract Testing
 - ✅ Environment Profiles
-- ✅ OAuth 2.0 Framework
-- ✅ API + UI Integrated Framework
+- ✅ Allure Reporting
+- ✅ API + UI Unified Automation Framework
+- ✅ Cloud Execution Support
 
 ---
 
 # 🔗 Related Repositories
 
-- Selenium Java Hybrid Automation Framework
-- Cucumber BDD Framework
-- REST Assured API Automation Framework
-- Playwright Framework *(Coming Soon)*
-- Java for QA Engineers *(Coming Soon)*
+### 🚀 Selenium Java Hybrid Automation Framework
+
+Enterprise UI Automation Framework using Selenium WebDriver, Java, TestNG, Maven, Page Object Model (POM), Excel Data-Driven Testing, Extent Reports, and Log4j2.
+
+---
+
+### 🚀 Cucumber BDD Automation Framework *(Coming Soon)*
+
+Enterprise BDD Automation Framework using Cucumber, Selenium, Java, TestNG, Maven, and Page Object Model.
+
+---
+
+### 🚀 Playwright Automation Framework *(Coming Soon)*
+
+Modern Automation Framework using Playwright, Java, TypeScript, API Testing, and CI/CD.
+
+---
+
+### 🚀 Java for QA Engineers *(Coming Soon)*
+
+Comprehensive Java concepts, coding exercises, collections, OOPs, exception handling, Java 8 features, and interview preparation designed specifically for QA Automation Engineers.
 
 ---
 
@@ -337,10 +605,33 @@ The framework automatically generates:
 
 ## Dishi Gogia
 
-**Senior QA Manager | Quality Engineering | Selenium | REST Assured | Java | Salesforce CRM | Oracle CPQ | API Testing**
+**Senior QA Manager | Quality Engineering | Test Automation | REST Assured | Selenium | Java | Salesforce CRM | Oracle CPQ | API Testing**
 
-- **GitHub:** https://github.com/Dishi-Gogia
-- **LinkedIn:** https://www.linkedin.com/in/dishi-gogia
+Passionate about building scalable automation frameworks and sharing practical knowledge with the QA community.
+
+- 🌐 GitHub: https://github.com/Dishi-Gogia
+- 💼 LinkedIn: https://www.linkedin.com/in/dishi-gogia
+
+---
+
+# 🤝 Contributing
+
+Contributions, suggestions, and improvements are welcome.
+
+If you'd like to improve the framework:
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Raise a Pull Request.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a **⭐ Star**.
+
+It helps others discover the project and motivates continued improvements.
 
 ---
 
@@ -350,14 +641,20 @@ This project is licensed under the **MIT License**.
 
 ---
 
-# ⭐ Support
+# 📌 Disclaimer
 
-If you found this project useful, consider giving it a **Star ⭐**.
+This framework was developed for **learning, portfolio, demonstration, and interview preparation** purposes.
 
-Feedback, suggestions, and contributions are always welcome.
+It showcases enterprise API automation best practices using Java, REST Assured, TestNG, Maven, Builder Pattern, POJO Serialization & Deserialization, JSON Schema Validation, API Chaining, and Data-Driven Testing.
+
+The framework is intended as a reference implementation for QA Engineers and Test Automation professionals looking to understand scalable REST API automation design.
 
 ---
 
-# 📌 Disclaimer
+## ⭐ Repository Status
 
-This project was developed for learning, demonstration, portfolio, and interview preparation purposes to showcase enterprise API automation framework design and best practices using Java, REST Assured, TestNG, Maven, Builder Pattern, JSON Schema Validation, and Data-Driven Testing.
+![GitHub last commit](https://img.shields.io/github/last-commit/Dishi-Gogia/rest-assured-api-framework)
+![GitHub repo size](https://img.shields.io/github/repo-size/Dishi-Gogia/rest-assured-api-framework)
+![GitHub stars](https://img.shields.io/github/stars/Dishi-Gogia/rest-assured-api-framework?style=social)
+
+🚀 **Built with Java • REST Assured • TestNG • Maven**
