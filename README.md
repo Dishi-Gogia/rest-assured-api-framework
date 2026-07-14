@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,100:2c5364&height=200&section=header&text=Selenium%20Java%20Hybrid%20Framework&fontSize=38&fontColor=ffffff"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,100:2c5364&height=200&section=header&text=REST%20Assured%20API%20Automation%20Framework&fontSize=38&fontColor=ffffff"/>
 </p>
 
 # 🚀 REST Assured API Automation Framework
