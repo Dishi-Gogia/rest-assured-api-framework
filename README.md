@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,100:2c5364&height=200&section=header&text=Selenium%20Java%20Hybrid%20Framework&fontSize=38&fontColor=ffffff"/>
+</p>
+
 # 🚀 REST Assured API Automation Framework
 
 A scalable, enterprise-grade REST API Automation Framework built using **Java, REST Assured, TestNG, and Maven**. The framework demonstrates modern API automation best practices including layered architecture, Builder Pattern, POJO Serialization & Deserialization, JSON Schema Validation, Data-Driven Testing, API Chaining, reusable utilities, centralized validations, reporting, and logging to deliver a maintainable, scalable, and production-ready automation solution.
